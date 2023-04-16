@@ -17,7 +17,7 @@ public class HabitsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult ListHabits()
+    public IActionResult GetHabit()
     {
         var habits = _habitService.ListHabits();
         return Ok(habits);
@@ -26,11 +26,24 @@ public class HabitsController : ControllerBase
     [HttpGet("{id:guid}")]
     public IActionResult GetHabit(Guid id)
     {
-        return Ok($"Habit {id}");
+        var habit = _habitService.GetHabit(id);
+
+        if (habit == null)
+        {
+            return NotFound();
+        }
+
+        HabitResponse response = new(
+            Id: habit.Id,
+            Name: habit.Name,
+            Description: habit.Description
+        );
+
+        return Ok(response);
     }
 
     [HttpPost]
-    public IActionResult CreateHabit(CreateHabitRequest habitRequest)
+    public IActionResult PostHabit(CreateHabitRequest habitRequest)
     {
         Habit habit = new Habit()
         {

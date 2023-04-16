@@ -1,3 +1,4 @@
+using HabitTracker.Api.Contracts;
 using HabitTracker.Api.Models;
 namespace HabitTracker.Api.Services;
 

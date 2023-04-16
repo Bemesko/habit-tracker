@@ -9,12 +9,12 @@ public class HabitService : IHabitService
     //TODO: return a created habit response
     public void CreateHabit(Habit habit)
     {
-        _habitRepository.Add(Guid.NewGuid(), habit);
+        _habitRepository.Add(habit.Id, habit);
     }
 
     public Habit GetHabit(Guid id)
     {
-        return _habitRepository.GetValueOrDefault(id);
+        return _habitRepository[id];
     }
 
     public IEnumerable<Habit> ListHabits()
