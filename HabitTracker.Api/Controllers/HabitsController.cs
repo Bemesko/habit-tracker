@@ -1,3 +1,5 @@
+using HabitTracker.Api.Contracts;
+using HabitTracker.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HabitTracker.Api.Controllers;
@@ -12,9 +14,16 @@ public class HabitsController : ControllerBase
         return Ok("All Habits");
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     public IActionResult GetHabit(Guid id)
     {
         return Ok($"Habit {id}");
     }
+
+    [HttpPost]
+    public IActionResult CreateHabit(CreateHabitRequest habitRequest)
+    {
+        return Ok(habitRequest);
+    }
+
 }
