@@ -1,4 +1,3 @@
-using HabitTracker.Api.Contracts;
 using HabitTracker.Api.Models;
 
 namespace HabitTracker.Api.Services;
@@ -7,18 +6,19 @@ public class HabitService : IHabitService
 {
     private readonly Dictionary<Guid, Habit> _habitRepository = new();
 
+    //TODO: return a created habit response
     public void CreateHabit(Habit habit)
     {
-        throw new NotImplementedException();
+        _habitRepository.Add(Guid.NewGuid(), habit);
     }
 
     public Habit GetHabit(Guid id)
     {
-        throw new NotImplementedException();
+        return _habitRepository.GetValueOrDefault(id);
     }
 
-    public Habit ListHabits()
+    public IEnumerable<Habit> ListHabits()
     {
-        throw new NotImplementedException();
+        return _habitRepository.Values.ToList();
     }
 }
