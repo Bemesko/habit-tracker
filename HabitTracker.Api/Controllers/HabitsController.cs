@@ -1,5 +1,4 @@
 using HabitTracker.Api.Contracts;
-using HabitTracker.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HabitTracker.Api.Controllers;
