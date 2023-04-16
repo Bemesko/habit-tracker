@@ -43,11 +43,29 @@ public class HabitsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult PostHabit(CreateHabitRequest habitRequest)
+    public IActionResult CreateHabit(CreateHabitRequest habitRequest)
     {
         var habit = Habit.From(habitRequest);
 
         _habitService.CreateHabit(habit);
+
+        return Ok(habit);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public IActionResult DeleteHabit(Guid id)
+    {
+        _habitService.DeleteHabit(id);
+
+        return NoContent();
+    }
+
+    [HttpPut("{id:guid}")]
+    public IActionResult UpdateHabit(Guid id, UpdateHabitRequest habitRequest)
+    {
+        var habit = Habit.From(id, habitRequest);
+
+        _habitService.UpdateHabit(habit);
 
         return Ok(habit);
     }

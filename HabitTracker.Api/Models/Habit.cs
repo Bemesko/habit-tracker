@@ -17,4 +17,15 @@ public class Habit
             Description = habitRequest.Description
         };
     }
+
+    public static Habit From(Guid id, UpdateHabitRequest habitRequest)
+    {
+        return new Habit()
+        {
+            Id = id,
+            Name = habitRequest.Name,
+            Description = habitRequest.Description
+        };
+
+    }
 }
