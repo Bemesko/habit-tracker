@@ -45,15 +45,10 @@ public class HabitsController : ControllerBase
     [HttpPost]
     public IActionResult PostHabit(CreateHabitRequest habitRequest)
     {
-        Habit habit = new Habit()
-        {
-            Id = Guid.NewGuid(),
-            Name = habitRequest.Name,
-            Description = habitRequest.Description
-        };
+        var habit = Habit.From(habitRequest);
 
         _habitService.CreateHabit(habit);
 
-        return Ok(habitRequest);
+        return Ok(habit);
     }
 }

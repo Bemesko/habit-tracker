@@ -6,7 +6,6 @@ public class HabitService : IHabitService
 {
     private readonly Dictionary<Guid, Habit> _habitRepository = new();
 
-    //TODO: return a created habit response
     public void CreateHabit(Habit habit)
     {
         _habitRepository.Add(habit.Id, habit);
