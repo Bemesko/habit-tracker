@@ -7,7 +7,7 @@ public class Habit
     public Guid Id { get; init; }
     public required string Name { get; set; }
     public required string Description { get; set; }
-    public List<HabitAction> Actions { get; set; } = new();
+    public Dictionary<Guid, HabitAction> Actions { get; set; } = new();
 
     public static Habit From(CreateHabitRequest habitRequest)
     {
@@ -28,5 +28,16 @@ public class Habit
             Description = habitRequest.Description
         };
 
+    }
+
+    public HabitResponse AsResponse()
+    {
+        HabitResponse habitResponse = new(
+            Id: this.Id,
+            Name: this.Name,
+            Description: this.Description
+        );
+
+        return habitResponse;
     }
 }

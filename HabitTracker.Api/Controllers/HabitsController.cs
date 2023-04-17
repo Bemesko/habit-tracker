@@ -20,6 +20,9 @@ public class HabitsController : ControllerBase
     public IActionResult GetHabit()
     {
         var habits = _habitService.ListHabits();
+
+        var response = habits.Select(habit => habit.AsResponse());
+
         return Ok(habits);
     }
 
@@ -33,13 +36,7 @@ public class HabitsController : ControllerBase
             return NotFound();
         }
 
-        HabitResponse response = new(
-            Id: habit.Id,
-            Name: habit.Name,
-            Description: habit.Description
-        );
-
-        return Ok(response);
+        return Ok(habit.AsResponse());
     }
 
     [HttpPost]
@@ -49,7 +46,7 @@ public class HabitsController : ControllerBase
 
         _habitService.CreateHabit(habit);
 
-        return Ok(habit);
+        return Ok(habit.AsResponse());
     }
 
     [HttpDelete("{id:guid}")]
@@ -67,14 +64,16 @@ public class HabitsController : ControllerBase
 
         _habitService.UpdateHabit(habit);
 
-        return Ok(habit);
+        return Ok(habit.AsResponse());
     }
 
     [HttpGet("{habitId:guid}/Actions")]
     public IActionResult GetHabitActions(Guid habitId)
     {
         var actions = _habitService.GetHabit(habitId).Actions;
-        return Ok(actions);
+        var response = actions.Select(action => action.Value.AsResponse());
+
+        return Ok(response);
     }
 
     [HttpPost("{habitId:guid}/Actions")]
@@ -82,8 +81,16 @@ public class HabitsController : ControllerBase
     {
         var action = HabitAction.From(actionRequest);
 
-        _habitService.GetHabit(habitId).Actions.Add(action);
+        _habitService.GetHabit(habitId).Actions.Add(action.Id, action);
 
-        return Ok(action);
+        return Ok(action.AsResponse());
+    }
+
+    [HttpGet("{habitId:guid}/Actions/{actionId:guid}")]
+    public IActionResult GetAction(Guid habitId, Guid actionId)
+    {
+        var action = _habitService.GetHabit(habitId).Actions[actionId];
+
+        return Ok(action.AsResponse());
     }
 }
