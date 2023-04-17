@@ -70,10 +70,24 @@ public class HabitsController : ControllerBase
     [HttpGet("{habitId:guid}/Actions")]
     public IActionResult GetHabitActions(Guid habitId)
     {
-        var actions = _habitService.GetHabit(habitId).Actions;
-        var response = actions.Select(action => action.Value.AsResponse());
+        var actions = _habitService.GetHabitActions(habitId);
+        var response = actions.Select(action => action.AsResponse());
 
         return Ok(response);
+    }
+
+    [HttpGet("{habitId:guid}/Actions/{actionId:guid}")]
+    public IActionResult GetHabitAction(Guid habitId, Guid actionId)
+    {
+        //TODO: Return a 404 if an action isn't found
+        var action = _habitService.GetHabitAction(habitId, actionId);
+
+        if (action == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(action.AsResponse());
     }
 
     [HttpPost("{habitId:guid}/Actions")]
@@ -82,14 +96,6 @@ public class HabitsController : ControllerBase
         var action = HabitAction.From(actionRequest);
 
         _habitService.GetHabit(habitId).Actions.Add(action.Id, action);
-
-        return Ok(action.AsResponse());
-    }
-
-    [HttpGet("{habitId:guid}/Actions/{actionId:guid}")]
-    public IActionResult GetHabitAction(Guid habitId, Guid actionId)
-    {
-        var action = _habitService.GetHabit(habitId).Actions[actionId];
 
         return Ok(action.AsResponse());
     }

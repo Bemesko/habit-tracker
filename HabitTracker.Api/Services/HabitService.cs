@@ -30,4 +30,38 @@ public class HabitService : IHabitService
     {
         _habitRepository.Remove(id);
     }
+
+    public IEnumerable<HabitAction> GetHabitActions(Guid id)
+    {
+        var actionDictionary = GetHabit(id).Actions;
+
+        var actions = actionDictionary.Select(action => action.Value);
+
+        return actions;
+    }
+
+    public HabitAction? GetHabitAction(Guid habitId, Guid actionId)
+    {
+        try
+        {
+            var action = GetHabit(habitId).Actions[actionId];
+
+            return action;
+        }
+        catch (KeyNotFoundException)
+        {
+            return null;
+        }
+
+    }
+
+    public void CreateHabitAction(Guid habitId, HabitAction action)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DeleteHabitAction(Guid habitId, HabitAction action)
+    {
+        throw new NotImplementedException();
+    }
 }

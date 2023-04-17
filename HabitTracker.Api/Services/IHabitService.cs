@@ -9,4 +9,8 @@ public interface IHabitService
     public void CreateHabit(Habit habit);
     public void UpdateHabit(Habit habit);
     public void DeleteHabit(Guid id);
+    public IEnumerable<HabitAction> GetHabitActions(Guid id);
+    public HabitAction? GetHabitAction(Guid habitId, Guid actionId);
+    public void CreateHabitAction(Guid habitId, HabitAction action);
+    public void DeleteHabitAction(Guid habitId, HabitAction action);
 }
