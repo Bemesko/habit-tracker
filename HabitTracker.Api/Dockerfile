@@ -1,21 +1,21 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["src/Api/Api.csproj", "src/Api/"]
-RUN dotnet restore "src/Api/Api.csproj"
+COPY ["HabitTracker.Api/HabitTracker.Api.csproj", "src/HabitTracker.Api/"]
+RUN dotnet restore "src/HabitTracker.Api/HabitTracker.Api.csproj"
 COPY . .
-WORKDIR "/src/src/Api/"
-RUN dotnet build "Api.csproj" -c Release -o /app/build
+WORKDIR "/src/HabitTracker.Api/"
+RUN dotnet build "HabitTracker.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "HabitTracker.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-ENTRYPOINT ["dotnet", "Api.dll"]
+ENTRYPOINT ["dotnet", "HabitTracker.Api.dll"]
