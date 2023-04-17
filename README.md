@@ -18,7 +18,7 @@ An API for tracking habits
 ## Checklist
 
 - [X] Draft API endpoints and requests
-- [ ] Make Habit Endpoints
+- [X] Make Habit Endpoints
+- [X] Store habits in memory
 - [ ] Make Actions endpoints
-- [ ] Store habits in memory
 - [ ] Persist habits in a database
