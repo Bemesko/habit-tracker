@@ -57,11 +57,11 @@ public class HabitService : IHabitService
 
     public void CreateHabitAction(Guid habitId, HabitAction action)
     {
-        throw new NotImplementedException();
+        GetHabit(habitId).Actions.Add(action.Id, action);
     }
 
-    public void DeleteHabitAction(Guid habitId, HabitAction action)
+    public void DeleteHabitAction(Guid habitId, Guid actionId)
     {
-        throw new NotImplementedException();
+        GetHabit(habitId).Actions.Remove(actionId);
     }
 }

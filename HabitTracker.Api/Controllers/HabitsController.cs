@@ -79,7 +79,6 @@ public class HabitsController : ControllerBase
     [HttpGet("{habitId:guid}/Actions/{actionId:guid}")]
     public IActionResult GetHabitAction(Guid habitId, Guid actionId)
     {
-        //TODO: Return a 404 if an action isn't found
         var action = _habitService.GetHabitAction(habitId, actionId);
 
         if (action == null)
@@ -95,7 +94,7 @@ public class HabitsController : ControllerBase
     {
         var action = HabitAction.From(actionRequest);
 
-        _habitService.GetHabit(habitId).Actions.Add(action.Id, action);
+        _habitService.CreateHabitAction(habitId, action);
 
         return Ok(action.AsResponse());
     }
@@ -103,7 +102,7 @@ public class HabitsController : ControllerBase
     [HttpDelete("{habitId:guid}/Actions/{actionId:guid}")]
     public IActionResult DeleteHabitAction(Guid habitId, Guid actionId)
     {
-        _habitService.GetHabit(habitId).Actions.Remove(actionId);
+        _habitService.DeleteHabitAction(habitId, actionId);
 
         return NoContent();
     }

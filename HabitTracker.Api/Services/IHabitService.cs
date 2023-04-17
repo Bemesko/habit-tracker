@@ -12,5 +12,5 @@ public interface IHabitService
     public IEnumerable<HabitAction> GetHabitActions(Guid id);
     public HabitAction? GetHabitAction(Guid habitId, Guid actionId);
     public void CreateHabitAction(Guid habitId, HabitAction action);
-    public void DeleteHabitAction(Guid habitId, HabitAction action);
+    public void DeleteHabitAction(Guid habitId, Guid actionId);
 }
