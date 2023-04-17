@@ -87,10 +87,18 @@ public class HabitsController : ControllerBase
     }
 
     [HttpGet("{habitId:guid}/Actions/{actionId:guid}")]
-    public IActionResult GetAction(Guid habitId, Guid actionId)
+    public IActionResult GetHabitAction(Guid habitId, Guid actionId)
     {
         var action = _habitService.GetHabit(habitId).Actions[actionId];
 
         return Ok(action.AsResponse());
+    }
+
+    [HttpDelete("{habitId:guid}/Actions/{actionId:guid}")]
+    public IActionResult DeleteHabitAction(Guid habitId, Guid actionId)
+    {
+        _habitService.GetHabit(habitId).Actions.Remove(actionId);
+
+        return NoContent();
     }
 }
