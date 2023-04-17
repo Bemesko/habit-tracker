@@ -4,9 +4,10 @@ namespace HabitTracker.Api.Models;
 
 public class Habit
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
     public required string Name { get; set; }
     public required string Description { get; set; }
+    public List<HabitAction> Actions { get; set; } = new();
 
     public static Habit From(CreateHabitRequest habitRequest)
     {

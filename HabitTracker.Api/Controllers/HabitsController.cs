@@ -69,4 +69,21 @@ public class HabitsController : ControllerBase
 
         return Ok(habit);
     }
+
+    [HttpGet("{habitId:guid}/Actions")]
+    public IActionResult GetHabitActions(Guid habitId)
+    {
+        var actions = _habitService.GetHabit(habitId).Actions;
+        return Ok(actions);
+    }
+
+    [HttpPost("{habitId:guid}/Actions")]
+    public IActionResult CreateHabitAction(Guid habitId, CreateHabitActionRequest actionRequest)
+    {
+        var action = HabitAction.From(actionRequest);
+
+        _habitService.GetHabit(habitId).Actions.Add(action);
+
+        return Ok(action);
+    }
 }
