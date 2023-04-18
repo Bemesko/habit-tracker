@@ -6,6 +6,14 @@ This is the first API I created from scratch without following any tutorials. I 
 
 Originally I wanted to make a frontend for this as well, but since I'm not focusing on that right now I'll leave this project open for anyone who wants to use it as a basis for their frontend. I'll later publish the service on Docker Hub so you can run it locally without having to install all the .NET tools.
 
+## Usage
+
+If you want to create a frontend for this API, assure you have docker installed and running, copy the `HabitTracker.Infra/docker-compose.yml` file into your development environment and do a `docker compose up` in the same directory it's in. This API will be accessible via `localhost:8080`.
+
+If you access `localhost:8080/api/Habits` and receive an empty array, you're good to go.
+
+In the future I might leave this running somewhere, for now it's only meant for development environments
+
 ## Model
 - Habit: Something that you want to do consistently over a period of time
   - e.g. Going to the gym; Waking up early; Studying a language
@@ -33,5 +41,5 @@ Originally I wanted to make a frontend for this as well, but since I'm not focus
 - [X] Make Habit Endpoints
 - [X] Store habits in memory
 - [X] Make Actions endpoints
-- [ ] Publish service to Docker Hub
+- [X] Publish service to Docker Hub
 - [ ] Persist habits in a database
