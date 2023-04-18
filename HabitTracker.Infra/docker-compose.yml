@@ -1,0 +1,6 @@
+services:
+  habit-tracker:
+    image: bemesko/habit-tracker
+    container_name: habit-tracker
+    ports:
+      - 80:80
