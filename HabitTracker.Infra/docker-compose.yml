@@ -4,3 +4,11 @@ services:
     container_name: habit-tracker
     ports:
       - 8080:80
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: example
