@@ -1,11 +1,15 @@
+using System.ComponentModel.DataAnnotations;
 using HabitTracker.Api.Contracts;
 
 namespace HabitTracker.Api.Models;
 
 public class Habit
 {
+    [Key]
     public Guid Id { get; init; }
+    [Required]
     public required string Name { get; set; }
+    [Required]
     public required string Description { get; set; }
     public Dictionary<Guid, HabitAction> Actions { get; set; } = new();
 

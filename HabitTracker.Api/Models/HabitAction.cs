@@ -1,10 +1,13 @@
+using System.ComponentModel.DataAnnotations;
 using HabitTracker.Api.Contracts;
 
 namespace HabitTracker.Api.Models;
 
 public class HabitAction
 {
+    [Key]
     public Guid Id { get; init; }
+    [Required]
     public required DateTime ActionTime { get; init; }
 
     public static HabitAction From(CreateHabitActionRequest actionRequest)
