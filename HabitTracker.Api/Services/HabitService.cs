@@ -4,6 +4,7 @@ namespace HabitTracker.Api.Services;
 
 public class HabitService : IHabitService
 {
+    //TODO: start using database to store habits instead of this
     private readonly Dictionary<Guid, Habit> _habitRepository = new();
 
     public Habit GetHabit(Guid id)
@@ -61,6 +62,11 @@ public class HabitService : IHabitService
     public void DeleteHabitAction(Guid habitId, Guid actionId)
     {
         var removedAction = GetHabit(habitId).Actions.FirstOrDefault(o => o.Id == actionId);
+
+        if (removedAction == null)
+        {
+            return;
+        }
 
         GetHabit(habitId).Actions.Remove(removedAction);
     }
