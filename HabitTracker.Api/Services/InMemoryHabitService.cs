@@ -2,7 +2,7 @@ using HabitTracker.Api.Models;
 
 namespace HabitTracker.Api.Services;
 
-public class HabitService : IHabitService
+public class InMemoryHabitService : IHabitService
 {
     //TODO: start using database to store habits instead of this
     private readonly Dictionary<Guid, Habit> _habitRepository = new();
