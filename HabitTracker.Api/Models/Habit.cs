@@ -11,7 +11,7 @@ public class Habit
     public required string Name { get; set; }
     [Required]
     public required string Description { get; set; }
-    public Dictionary<Guid, HabitAction> Actions { get; set; } = new();
+    public List<HabitAction> Actions { get; set; } = new();
 
     public static Habit From(CreateHabitRequest habitRequest)
     {

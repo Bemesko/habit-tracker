@@ -33,9 +33,7 @@ public class HabitService : IHabitService
 
     public IEnumerable<HabitAction> GetHabitActions(Guid id)
     {
-        var actionDictionary = GetHabit(id).Actions;
-
-        var actions = actionDictionary.Select(action => action.Value);
+        var actions = GetHabit(id).Actions;
 
         return actions;
     }
@@ -44,7 +42,7 @@ public class HabitService : IHabitService
     {
         try
         {
-            var action = GetHabit(habitId).Actions[actionId];
+            var action = GetHabit(habitId).Actions.FirstOrDefault(o => o.Id == actionId);
 
             return action;
         }
@@ -57,11 +55,13 @@ public class HabitService : IHabitService
 
     public void CreateHabitAction(Guid habitId, HabitAction action)
     {
-        GetHabit(habitId).Actions.Add(action.Id, action);
+        GetHabit(habitId).Actions.Add(action);
     }
 
     public void DeleteHabitAction(Guid habitId, Guid actionId)
     {
-        GetHabit(habitId).Actions.Remove(actionId);
+        var removedAction = GetHabit(habitId).Actions.FirstOrDefault(o => o.Id == actionId);
+
+        GetHabit(habitId).Actions.Remove(removedAction);
     }
 }
