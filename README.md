@@ -43,3 +43,4 @@ In the future I might leave this running somewhere, for now it's only meant for 
 - [X] Make Actions endpoints
 - [X] Publish service to Docker Hub
 - [ ] Persist habits in a database
+  - Good resource to learn about EF Core: https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-7.0&tabs=visual-studio
