@@ -9,12 +9,12 @@ public class DatabaseHabitService : IHabitService
     public DatabaseHabitService(ApplicationDbContext dbContext)
     {
         this._dbContext = dbContext;
-
     }
 
     public void CreateHabit(Habit habit)
     {
-        throw new NotImplementedException();
+        _dbContext.Habits.Add(habit);
+        _dbContext.SaveChanges();
     }
 
     public void CreateHabitAction(Guid habitId, HabitAction action)
@@ -24,7 +24,15 @@ public class DatabaseHabitService : IHabitService
 
     public void DeleteHabit(Guid id)
     {
-        throw new NotImplementedException();
+        var deletedHabit = _dbContext.Habits.Find(id);
+
+        if (deletedHabit == null)
+        {
+            return;
+        }
+
+        _dbContext.Habits.Remove(deletedHabit);
+        _dbContext.SaveChanges();
     }
 
     public void DeleteHabitAction(Guid habitId, Guid actionId)
@@ -34,7 +42,9 @@ public class DatabaseHabitService : IHabitService
 
     public Habit GetHabit(Guid id)
     {
-        throw new NotImplementedException();
+        var habit = _dbContext.Habits.Find(id);
+
+        return habit;
     }
 
     public HabitAction? GetHabitAction(Guid habitId, Guid actionId)
