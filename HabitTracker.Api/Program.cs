@@ -8,7 +8,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")));
 
 // Add services to the container.
-builder.Services.AddScoped<IHabitService, DatabaseHabitService>();
+builder.Services.AddScoped<IHabitService, InMemoryHabitService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
